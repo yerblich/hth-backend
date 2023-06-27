@@ -3,6 +3,9 @@ const cors = require('@fastify/cors');
 const formBody = require('@fastify/formbody');
 const pool = require('./database');
 
+const port = process.env.PORT || 3000;
+const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+
 fastify.register(formBody);
 fastify.register(cors, {
   origin: 'http://localhost:3001',
