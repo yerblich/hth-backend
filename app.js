@@ -12,7 +12,7 @@ fastify.register(cors, {
 });
 
 fastify.get('/', async (req, res) => {
-  const connection = await connect(`postgres://localhost:5432/itribes_database`, {
+  const connection = await connect(`postgres://0.0.0.0:5432/itribes_database`, {
     user: 'postgres',
     password: 'Rabeinu18!',
   })
