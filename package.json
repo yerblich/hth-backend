@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
     "build": "npm install",
+    "start": "node app.js",
     "test": "jest"
   },
   "keywords": [],
@@ -15,7 +15,6 @@
     "@fastify/compress": "^6.4.0",
     "@fastify/cors": "^8.2.1",
     "@fastify/formbody": "^7.4.0",
-    "bcrypt": "^5.1.0",
     "fastify": "^4.17.0",
     "fastify-compress": "^4.1.0",
     "fastify-cors": "^6.1.0",
