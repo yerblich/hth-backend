@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: '0.0.0.0',
+  connectionString: "postgresql://postgres:Rabeinu18!@0.0.0.0:5432/itribes_database",
   ssl: {
     rejectUnauthorized: false,
   }
