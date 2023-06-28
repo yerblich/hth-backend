@@ -11,12 +11,12 @@ fastify.register(cors, {
   origin: 'http://localhost:3001',
 });
 
-fastify.get('/', async (req, res) => {
-  const connection = await connect(`postgres://0.0.0.0:5432/itribes_database`, {
-    user: 'postgres',
-    password: 'Rabeinu18!',
-  })
-});
+// fastify.get('/', async (req, res) => {
+//   const connection = await connect(`postgres://0.0.0.0:5432/itribes_database`, {
+//     user: 'postgres',
+//     password: 'Rabeinu18!',
+//   })
+// });
 
 fastify.get('/villages-info', async (request, reply) => {
   try {
