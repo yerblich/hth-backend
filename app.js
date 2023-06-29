@@ -1,5 +1,6 @@
 const fastify = require('fastify')();
 const cors = require('@fastify/cors');
+const csv = require('csv-parser');
 const formBody = require('@fastify/formbody');
 const pool = require('./database');
 
@@ -11,12 +12,25 @@ fastify.register(cors, {
   origin: 'http://localhost:3001',
 });
 
-// fastify.get('/', async (req, res) => {
-//   const connection = await connect(`postgres://0.0.0.0:5432/itribes_database`, {
-//     user: 'postgres',
-//     password: 'Rabeinu18!',
-//   })
-// });
+fastify.get('/importUsers', async (req, reply) => {
+  const dataRows = [];
+  fs.createReadStream('Users/baruch-kavnat/Downloads/users.csv')
+    .pipe(csv())
+    .on('data', (data) => dataRows.push(data))
+    .on('end', () => {
+      dataRows.forEach(row => {
+        // Adjust this query to match your specific table and data structure
+        pool.query('INSERT INTO users (id, firstname, lastname, username, gender, dateofbirth, village, community, city, state, country, membertype, email, createdat, updatedat, password, hashed_password) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)', 
+          [row.id, row.firstname, row.lastname, row.username, row.gender, row.dateofbirth, row.village, row.community, row.city, row.state, row.country, row.membertype, row.email, row.createdat, row.updatedat, row.password, row.hashed_password], 
+          (error, results) => {
+            if (error) {
+              throw error;
+            }
+          });
+      });
+      reply.send({status: 'Import completed'});
+    });
+});
 
 fastify.get('/villages-info', async (request, reply) => {
   try {
