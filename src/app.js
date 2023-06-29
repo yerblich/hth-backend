@@ -156,6 +156,6 @@ async function routes(fastify, options) {
   });
 }
 
-export default routes;
+fastify.register(routes);
 
 module.exports = fastify;
