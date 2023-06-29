@@ -9,7 +9,7 @@ const host = ("RENDER" in process.env) ? `0.0.0.0` : null;
 
 fastify.register(formBody);
 fastify.register(cors, {
-  origin: 'http://localhost:3001',
+  origin: 'https://itribe-frontend.onrender.com',
 });
 
 fastify.get('/villages-info', async (request, reply) => {

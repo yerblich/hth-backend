@@ -7,8 +7,8 @@ const start = async () => {
     console.log('Connected to the database');
     client.release();
 
-    await fastify.listen('0.0.0.0');
-    console.log('Server is running on port 3000');
+    await fastify.listen(process.env.PORT);
+    console.log('Server is running on port: ', process.env.PORT);
   } catch (err) {
     console.error(err);
     process.exit(1);
