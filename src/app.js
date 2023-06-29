@@ -7,12 +7,11 @@ const pool = require("../database");
 const port = process.env.PORT || 3000;
 const host = "RENDER" in process.env ? `0.0.0.0` : null;
 
-fastify.register(formBody);
-fastify.register(cors, {
-  origin: "https://hth-front.vercel.app",
-});
-
 async function routes(fastify, options) {
+  fastify.register(formBody);
+  fastify.register(cors, {
+    origin: "https://hth-front.vercel.app",
+  });
   fastify.get("/", async (request, reply) => {
     return { hello: "world" };
   });
@@ -156,6 +155,6 @@ async function routes(fastify, options) {
   });
 }
 
-fastify.register(routes);
+// fastify.register(routes);
 
 module.exports = routes;
