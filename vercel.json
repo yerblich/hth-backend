@@ -1,6 +1,8 @@
 {
-  "version": 2,
-  "name": "hth",
-  "builds": [{ "src": "app.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/app.js" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/serverless.js"
+    }
+  ]
 }
