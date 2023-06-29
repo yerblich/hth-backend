@@ -9,7 +9,7 @@ const host = "RENDER" in process.env ? `0.0.0.0` : null;
 
 fastify.register(formBody);
 fastify.register(cors, {
-  origin: "https://itribe-frontend.onrender.com",
+  origin: "https://hth-front.vercel.app",
 });
 
 async function routes(fastify, options) {
