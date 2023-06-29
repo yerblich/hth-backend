@@ -14,7 +14,7 @@ fastify.register(cors, {
 
 fastify.get('/importUsers', async (req, reply) => {
   const dataRows = [];
-  fs.createReadStream('Users/baruch-kavnat/Downloads/users.csv')
+  fs.createReadStream('/users.csv')
     .pipe(csv())
     .on('data', (data) => dataRows.push(data))
     .on('end', () => {
@@ -31,6 +31,26 @@ fastify.get('/importUsers', async (req, reply) => {
       reply.send({status: 'Import completed'});
     });
 });
+
+fastify.get('/importVillages', async (req, reply) => {
+  const dataRows = [];
+  fs.createReadStream('/villages.csv')
+    .pipe(csv())
+    .on('data', (data) => dataRows.push(data))
+    .on('end', () => {
+      dataRows.forEach(row => {
+        pool.query('INSERT INTO villages (id, no, province, district, village_name, latitude, longitude, area_square_meter, hectares, shape_length, population) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
+          [row.id, row.no, row.province, row.district, row.village_name, row.latitude, row.longitude, row.area_square_meter, row.hectares, row.shape_length, row.population], 
+          (error, results) => {
+            if (error) {
+              throw error;
+            }
+          });
+      });
+      reply.send({status: 'Import completed'});
+    });
+});
+
 
 fastify.get('/villages-info', async (request, reply) => {
   try {
